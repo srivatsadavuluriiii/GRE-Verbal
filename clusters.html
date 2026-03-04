@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semantic Clusters - GRE Vocabulary</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background-color: hsl(var(--background));
+        }
+
+        .cluster-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        .cluster-header {
+            margin-bottom: 3rem;
+        }
+
+        .cluster-main-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid hsl(var(--border));
+        }
+
+        .cluster-main-title h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: hsl(var(--foreground));
+        }
+
+        .back-home {
+            display: inline-flex;
+            align-items: center;
+            height: 36px;
+            padding: 0 1rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            background-color: transparent;
+            color: hsl(var(--foreground));
+            border: 1px solid hsl(var(--border));
+            border-radius: var(--radius);
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .back-home:hover {
+            background-color: hsl(var(--secondary));
+            border-color: hsl(var(--foreground));
+        }
+
+        .cluster-subtitle {
+            font-size: 0.9375rem;
+            color: hsl(var(--muted-foreground));
+            margin-bottom: 2rem;
+        }
+
+        .cluster-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background-color: hsl(var(--card));
+            border: 1px solid hsl(var(--border));
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            text-align: left;
+        }
+
+        .stat-card .number {
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: hsl(var(--foreground));
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-card .label {
+            font-size: 0.875rem;
+            color: hsl(var(--muted-foreground));
+            font-weight: 400;
+        }
+
+        .search-box {
+            margin-bottom: 1.5rem;
+        }
+
+        .search-box input {
+            width: 100%;
+            height: 44px;
+            padding: 0 1rem;
+            font-size: 0.9375rem;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', system-ui, sans-serif;
+            background-color: hsl(var(--card));
+            color: hsl(var(--foreground));
+            border: 1px solid hsl(var(--border));
+            border-radius: var(--radius);
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .search-box input::placeholder {
+            color: hsl(var(--muted-foreground));
+        }
+
+        .search-box input:focus {
+            border-color: hsl(var(--foreground));
+        }
+
+        .view-toggle {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            padding: 0.25rem;
+            background-color: hsl(var(--secondary));
+            border-radius: var(--radius);
+            width: fit-content;
+        }
+
+        .view-toggle button {
+            height: 36px;
+            padding: 0 1.25rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            background-color: transparent;
+            color: hsl(var(--muted-foreground));
+            border: none;
+            border-radius: calc(var(--radius) - 2px);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', system-ui, sans-serif;
+        }
+
+        .view-toggle button.active {
+            background-color: hsl(var(--card));
+            color: hsl(var(--foreground));
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+
+        .cluster-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+
+        .cluster-card {
+            background-color: hsl(var(--card));
+            border: 1px solid hsl(var(--border));
+            border-radius: var(--radius);
+            padding: 1.25rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .cluster-card:hover {
+            border-color: hsl(var(--foreground));
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .cluster-card.hidden {
+            display: none;
+        }
+
+        .cluster-title {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            color: hsl(var(--foreground));
+            margin-bottom: 0.75rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .cluster-count {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: hsl(var(--muted-foreground));
+            background-color: hsl(var(--secondary));
+            padding: 0.25rem 0.625rem;
+            border-radius: calc(var(--radius) - 2px);
+            white-space: nowrap;
+        }
+
+        .cluster-words {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .word-tag {
+            font-size: 0.8125rem;
+            color: hsl(var(--foreground));
+            background-color: hsl(var(--secondary));
+            padding: 0.375rem 0.75rem;
+            border-radius: calc(var(--radius) - 2px);
+            border: 1px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .word-tag:hover {
+            background-color: hsl(var(--primary));
+            color: hsl(var(--primary-foreground));
+        }
+
+        .network-view {
+            display: none;
+            width: 100%;
+            height: 800px;
+            background-color: hsl(var(--card));
+            border: 1px solid hsl(var(--border));
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+
+        .network-view.active {
+            display: block;
+        }
+
+        #cluster-network {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: hsl(var(--card));
+            border-radius: var(--radius);
+            padding: 2rem;
+            max-width: 600px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            animation: modalSlideIn 0.2s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            cursor: pointer;
+            color: hsl(var(--muted-foreground));
+            background-color: transparent;
+            border: 1px solid hsl(var(--border));
+            border-radius: var(--radius);
+            transition: all 0.2s ease;
+        }
+
+        .modal-close:hover {
+            background-color: hsl(var(--secondary));
+            color: hsl(var(--foreground));
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: hsl(var(--foreground));
+            margin-bottom: 0.5rem;
+            padding-right: 2rem;
+        }
+
+        .modal-subtitle {
+            font-size: 0.875rem;
+            color: hsl(var(--muted-foreground));
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-words {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .cluster-container {
+                padding: 1.5rem 1rem;
+            }
+
+            .cluster-main-title {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .cluster-main-title h1 {
+                font-size: 1.5rem;
+            }
+
+            .cluster-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .cluster-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .network-view {
+                height: 500px;
+            }
+
+            .view-toggle {
+                width: 100%;
+            }
+
+            .view-toggle button {
+                flex: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cluster-container">
+        <div class="cluster-header">
+            <div class="cluster-main-title">
+                <h1>Semantic Clusters</h1>
+                <a href="index.html" class="back-home">← Back to Quiz</a>
+            </div>
+            
+            <p class="cluster-subtitle">Explore 480 semantic clusters organizing 1,019 GRE vocabulary words</p>
+            
+            <div class="cluster-stats">
+                <div class="stat-card">
+                    <div class="number" id="total-clusters">480</div>
+                    <div class="label">Total Clusters</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number" id="total-words">1,019</div>
+                    <div class="label">Total Words</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">100%</div>
+                    <div class="label">Coverage</div>
+                </div>
+            </div>
+
+            <div class="search-box">
+                <input type="text" id="cluster-search" placeholder="Search clusters or words...">
+            </div>
+
+            <div class="view-toggle">
+                <button id="grid-view-btn" class="active">Grid View</button>
+                <button id="network-view-btn">Network View</button>
+            </div>
+        </div>
+
+        <div id="grid-container" class="cluster-grid active">
+            <!-- Clusters will be dynamically loaded here -->
+        </div>
+
+        <div id="network-container" class="network-view">
+            <canvas id="cluster-network"></canvas>
+        </div>
+    </div>
+
+    <!-- Modal for cluster details -->
+    <div id="cluster-modal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">×</span>
+            <h2 class="modal-title" id="modal-cluster-name"></h2>
+            <p class="modal-subtitle">
+                <strong id="modal-word-count"></strong> in this cluster
+            </p>
+            <div class="modal-words" id="modal-words-container"></div>
+        </div>
+    </div>
+
+    <script src="cluster-data.js"></script>
+    <script src="cluster-viz.js"></script>
+</body>
+</html>

@@ -7,14 +7,16 @@
 ```
 gre-vocabulary-quiz/
 ├── index.html              # Main app
+├── clusters.html          # Cluster visualization page
 ├── style.css              # Styling
 ├── script.js              # Quiz logic
-├── quiz-data.js           # Questions (Days 1-4, 602 words)
-├── quiz-day1.txt          # Backup Day 1
-├── quiz-day2.txt          # Backup Day 2
-├── quiz-day3.txt          # Backup Day 3
-├── quiz-day4.txt          # Backup Day 4
+├── cluster-viz.js         # Visualization logic
+├── cluster-data.js        # Cluster data
+├── quiz-data.js           # Questions (Days 1-7, 1019 words)
+├── cluster.txt            # Master semantic clusters
+├── quiz-day1.txt - quiz-day7.txt    # Backup quiz data
 ├── Day1.txt - Day7.txt    # Source word lists
+├── master.txt             # Complete word list (1019 words)
 ├── generate_quiz_detailed.py  # Quiz generator
 ├── README.md              # Main docs
 ├── GIT_SETUP.md          # Git instructions
@@ -71,19 +73,27 @@ python3 -m http.server 8000
 
 ## 🎨 Features
 
-- 7-day quiz structure
-- MCQ with tricky 3-5 word definitions
-- Visual feedback (green/red)
-- Score tracking
-- Mobile responsive
-- No backend needed - pure static site
+- **7-day quiz structure** with 1,019 GRE words
+- **MCQ format** with tricky 3-5 word definitions
+- **Visual feedback** - black/white with red for errors
+- **Score tracking** with real-time progress
+- **Interactive cluster visualization** - 480 semantic clusters
+- **Grid and Network views** for exploring word relationships
+- **Search functionality** across all clusters
+- **ShadCN-inspired design** - Minimalist black & white aesthetic
+- **Apple SF Pro typography** - System font stack
+- **Fully responsive** - Mobile-first design
+- **No backend needed** - Pure static site
 
 ## 📚 Tech Stack
 
-- HTML5, CSS3, JavaScript (Vanilla)
-- No frameworks or dependencies
-- Static site - perfect for Cloudflare Pages
-- ~100KB total size
+- **HTML5, CSS3, JavaScript** (Vanilla - No frameworks)
+- **Design System**: ShadCN-inspired monochrome aesthetic
+- **Typography**: Apple SF Pro / System font stack
+- **Color Palette**: Black, white, and grays only
+- **No dependencies** - Completely standalone
+- **Static site** - Perfect for Cloudflare Pages
+- **~150KB total size** (including all assets)
 
 ## 🔄 Adding More Quiz Data
 
