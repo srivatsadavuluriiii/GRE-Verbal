@@ -1,0 +1,13 @@
+{
+  "name": "gre-vocabulary-quiz",
+  "version": "1.0.0",
+  "description": "Interactive GRE Vocabulary Quiz Application",
+  "main": "index.html",
+  "scripts": {
+    "dev": "python3 -m http.server 8000",
+    "build": "echo 'Static site - no build needed'"
+  },
+  "keywords": ["gre", "vocabulary", "quiz", "education"],
+  "author": "",
+  "license": "MIT"
+}

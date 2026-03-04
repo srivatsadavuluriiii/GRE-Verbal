@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GRE Vocabulary Quiz</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>GRE Vocabulary Quiz</h1>
+            <div class="score-board">
+                <span>Score: <span id="score">0</span></span>
+                <span>Progress: <span id="progress">0/0</span></span>
+            </div>
+        </header>
+
+        <!-- Quiz Selection Section -->
+        <div id="selection-section" class="selection-section">
+            <h2>Select Your Quiz</h2>
+            <div class="quiz-cards">
+                <div class="quiz-card" onclick="selectQuiz(1)">
+                    <div class="quiz-number">Day 1</div>
+                    <h3>Quiz 1</h3>
+                    <p>150 GRE Words</p>
+                    <button class="quiz-btn">Start Quiz</button>
+                </div>
+                <div class="quiz-card" onclick="selectQuiz(2)">
+                    <div class="quiz-number">Day 2</div>
+                    <h3>Quiz 2</h3>
+                    <p>150 GRE Words</p>
+                    <button class="quiz-btn">Start Quiz</button>
+                </div>
+                <div class="quiz-card" onclick="selectQuiz(3)">
+                    <div class="quiz-number">Day 3</div>
+                    <h3>Quiz 3</h3>
+                    <p>149 GRE Words</p>
+                    <button class="quiz-btn">Start Quiz</button>
+                </div>
+                <div class="quiz-card" onclick="selectQuiz(4)">
+                    <div class="quiz-number">Day 4</div>
+                    <h3>Quiz 4</h3>
+                    <p>149 GRE Words</p>
+                    <button class="quiz-btn">Start Quiz</button>
+                </div>
+                <div class="quiz-card" onclick="selectQuiz(5)">
+                    <div class="quiz-number">Day 5</div>
+                    <h3>Quiz 5</h3>
+                    <p>150 GRE Words</p>
+                    <button class="quiz-btn">Start Quiz</button>
+                </div>
+                <div class="quiz-card" onclick="selectQuiz(6)">
+                    <div class="quiz-number">Day 6</div>
+                    <h3>Quiz 6</h3>
+                    <p>149 GRE Words</p>
+                    <button class="quiz-btn">Start Quiz</button>
+                </div>
+                <div class="quiz-card" onclick="selectQuiz(7)">
+                    <div class="quiz-number">Day 7</div>
+                    <h3>Quiz 7</h3>
+                    <p>119 GRE Words</p>
+                    <button class="quiz-btn">Start Quiz</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz Section -->
+        <div id="quiz-section" class="quiz-section hidden">
+            <div class="quiz-header">
+                <button id="back-btn" class="back-btn">← Back to Menu</button>
+                <span id="quiz-title" class="quiz-title"></span>
+            </div>
+            <div class="question-card">
+                <h2 id="word" class="word"></h2>
+                <p class="instruction">Select the correct meaning:</p>
+                <div id="options" class="options"></div>
+            </div>
+            <div class="navigation">
+                <button id="next-btn" disabled>Next Question</button>
+            </div>
+        </div>
+
+        <!-- Result Section -->
+        <div id="result-section" class="result-section hidden">
+            <h2>Quiz Complete!</h2>
+            <div class="final-score">
+                <p>Your Final Score:</p>
+                <h3 id="final-score">0/0</h3>
+                <p id="percentage"></p>
+            </div>
+            <div class="result-actions">
+                <button id="restart-btn">Back to Menu</button>
+                <button id="retry-btn">Retry Quiz</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="quiz-data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
