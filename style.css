@@ -348,6 +348,21 @@ header h1 {
     }
 }
 
+/* Footer */
+.footer {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 2px solid #e0e0e0;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.footer p {
+    margin: 0;
+    font-weight: 500;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .container {
